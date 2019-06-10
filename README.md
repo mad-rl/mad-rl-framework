@@ -19,11 +19,16 @@ The main idea of this approach is to ensure that the agent will be trained in a 
 
 The components we have split the framework are:
 
- * AgentBase: The base define an interface that should be able to integrate in any RL environment.
- * Sensors: The sensors are the different way to get information from the environment in a runtime context.
- * Interpreters: The interpreters are a bridge between Sensors and other parts of the agent, they transforms the information taken by the sensors and apply any transformation or process to provide other parts in the agent the information ready to use.
- * Actuators: The actuators translate the agent decisions into something comprehensible by the environment.
- * Experiences: The experiences are very related with the RL approach / algorithm used. However the concept is almost alway the same, this component allows to isolate the experience approach.
- * Knowledge: The knowledge is where the algorithm must be implemented, here the learning must be saved and accessed in order to take decisions.
+#### The Agent
 
- 
+ * *AgentBase:* The base define an interface that should be able to integrate in any RL environment.
+ * *Sensors:* The sensors are the different way to get information from the environment in a runtime context.
+ * *Interpreters:* The interpreters are a bridge between Sensors and other parts of the agent, they transforms the information taken by the sensors and apply any transformation or process to provide other parts in the agent the information ready to use.
+ * *Actuators:* The actuators translate the agent decisions into something comprehensible by the environment.
+ * *Experiences:* The experiences are very related with the RL approach / algorithm used. However the concept is almost alway the same, this component allows to isolate the experience approach.
+ * *Knowledge:* The knowledge is where the algorithm must be implemented, here the learning must be saved and accessed in order to take decisions.
+
+#### The Environment
+
+In this case we have implemented the framwork using OpenAI Gym creating a train loop script and a testing script.
+
