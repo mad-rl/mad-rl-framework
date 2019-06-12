@@ -40,8 +40,21 @@ conda env create -f madrl_retro_gym_conda_env.yml
 
 ## Run
 
+Default AGENT is inside **algorithms/_new_template** so the command to run the agent is:
+
 ```
 PYTHONPATH=./src/ python ./src/algorithms/_new_template/train_agent.py
 ```
 
+In order to run another agent, for instance the Breakout Actor-Critic Policy Agent, the command to run it is:
 
+```
+PYTHONPATH=./src/ AGENT_MODULE=algorithms.breakout_actor_critic_policy.agent python ./src/algorithms/breakout_actor_critic_policy/train_agent.py
+```
+
+In order to create a new agent, copy the entire folder **./src/algorithms/_new_template/** and rename it with yours, implement your algorithm and run it using the same command but changing the module and path for yours, eg:
+
+```
+cp ./src/algorithms/_new_template/ ./src/algorithms/my_algorithm/
+PYTHONPATH=./src/ AGENT_MODULE=algorithms.my_algorithm.agent python ./src/algorithms/my_algorithm/train_agent.py
+```
