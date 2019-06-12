@@ -38,5 +38,10 @@ In this case we have implemented the framwork using OpenAI Gym creating a train 
 conda env create -f madrl_retro_gym_conda_env.yml
 ```
 
+## Run
+
+```
+PYTHONPATH=./src/ python ./src/algorithms/_new_template/train_agent.py
+```
 
 
