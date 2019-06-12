@@ -1,4 +1,4 @@
-from agent.experiences_base import ExperiencesBase
+from agent_base.experiences_base import ExperiencesBase
 
 class Experiences(ExperiencesBase):
 

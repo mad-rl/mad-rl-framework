@@ -1,4 +1,4 @@
-from agent.interpreter_base import InterpreterBase
+from agent_base.interpreter_base import InterpreterBase
 from sensor import Sensor
 
 class Interpreter(InterpreterBase):
