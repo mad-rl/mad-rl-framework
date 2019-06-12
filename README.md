@@ -32,4 +32,11 @@ The components we have split the framework are:
 
 In this case we have implemented the framwork using OpenAI Gym creating a train loop script and a testing script.
 
+## Installation
+
+```
+conda env create -f madrl_retro_gym_conda_env.yml
+```
+
+
 
