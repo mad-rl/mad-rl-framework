@@ -7,8 +7,9 @@ EPISODES = int(os.getenv('EPISODES', 10))
 STEPS_PER_EPISODE = int(os.getenv('STEPS_PER_EPISODE', 100))
 # GAME = int(os.getenv('GAME', 'StreetFighterIISpecialChampionEdition-Genesis'))
 GAME = os.getenv('GAME', 'BreakoutDeterministic-v4')
+ENV_RENDER = os.getenv('ENV_RENDER', True)
 
-AGENT_MODULE = os.getenv('AGENT_MODULE', 'algorithms._new_template.agent')
+AGENT_MODULE = os.getenv('AGENT_MODULE', 'algorithms._new_template.new_agent')
 AGENT_CLASS = os.getenv('AGENT_CLASS', 'Agent')
 
 def agent_class(module, class_name):
@@ -32,21 +33,33 @@ if __name__ == "__main__":
         # Get initial observation (first state)
         _obs = env.render(mode='rgb_array')
         sf_agent.start_episode(episode)
+        state = sf_agent.interpreter.obs_to_state(_obs)
 
+        done = False
         step = 0
-        while not game_finished:
-            sf_agent.start_step(step)
+        while not done:
+            for step in range(STEPS_PER_EPISODE):
 
-            action = sf_agent.get_action(_obs)
+                sf_agent.start_step(step)
 
-            _next_obs, _rew, _done, _info = env.step(action)
+                action = sf_agent.get_action(state)
 
-            sf_agent.add_experience(_obs, _rew, action, _next_obs, info=_info)
+                _next_obs, _rew, done, _info = env.step(action)
+                next_state = sf_agent.interpreter.obs_to_state(_next_obs)
 
-            _obs = _next_obs
-            game_finished = _done or step > STEPS_PER_EPISODE
+                sf_agent.add_experience(state, _rew, action, next_state, info=_info)
 
-            sf_agent.end_step(step)
-            step = step +1
+                state = next_state
+
+                if ENV_RENDER:
+                    env.render()
+
+                sf_agent.end_step(step)
+                step = step +1
+
+                if done:
+                    break
+
+            sf_agent.train()
 
         sf_agent.end_episode(episode)

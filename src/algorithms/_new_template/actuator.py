@@ -1,4 +1,4 @@
-from agent.actuator_base import ActuatorBase
+from agent_base.actuator_base import ActuatorBase
 
 class Actuator(ActuatorBase):
     
