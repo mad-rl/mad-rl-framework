@@ -1,4 +1,4 @@
-class Knowledge:
+class InterpreterBase:
     
     def __init__(self):
         pass

@@ -1,7 +1,9 @@
-class Experiences:
+from agent.experiences_base import ExperiencesBase
+
+class Experiences(ExperiencesBase):
 
     def __init__(self):
-        self.experiences = []
+        ExperiencesBase.__init__(self)
 
     def add(self, observation, reward, action, next_observation):
         pass

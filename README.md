@@ -15,7 +15,7 @@ The main idea of this approach is to ensure that the agent will be trained in a 
 ![RL Agent Environment Runtime](./images/mad_rl_scheme_runtime.png)
 
 
-### Components
+### Components Summary
 
 The components we have split the framework are:
 
@@ -31,4 +31,5 @@ The components we have split the framework are:
 #### The Environment
 
 In this case we have implemented the framwork using OpenAI Gym creating a train loop script and a testing script.
+
 

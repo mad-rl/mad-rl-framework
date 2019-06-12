@@ -1,9 +1,9 @@
+from agent.actuator_base import ActuatorBase
 
-
-class Actuator:
+class Actuator(ActuatorBase):
     
     def __init__(self):
-        self.action_space = {}
+        ActuatorBase.__init__(self)
 
     def model_to_env(self):
         pass

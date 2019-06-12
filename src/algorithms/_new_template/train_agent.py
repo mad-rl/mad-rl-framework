@@ -1,25 +1,30 @@
 import os
-import retro
-
-from agent.actuator import Actuator
-from agent.interpreter import Interpreter
-from agent.knowledge import Knowledge
-from agent.experiences import Experiences
-from agent.agent_base import AgentBase
+# import retro
+import gym
 
 RECORD_REPLY = bool(os.getenv('RECORD_REPLY', False))
 EPISODES = int(os.getenv('EPISODES', 10))
 STEPS_PER_EPISODE = int(os.getenv('STEPS_PER_EPISODE', 100))
-GAME = int(os.getenv('GAME', 'StreetFighterIISpecialChampionEdition-Genesis'))
+# GAME = int(os.getenv('GAME', 'StreetFighterIISpecialChampionEdition-Genesis'))
+GAME = os.getenv('GAME', 'BreakoutDeterministic-v4')
 
-env = retro.make(game=GAME)
+AGENT_MODULE = os.getenv('AGENT_MODULE', 'algorithms._new_template.new_agent')
+AGENT_CLASS = os.getenv('AGENT_CLASS', 'NewAgent')
+
+def agent_class(module, class_name):
+    sf_agent_mod = __import__(module, fromlist=["*"])
+    sf_agent_class = getattr(sf_agent_mod, class_name)
+    return sf_agent_class
+
+# env = retro.make(game=GAME)
+env = gym.make(GAME)
 
 if RECORD_REPLY is True:
     env.auto_record(path='./reply/')
 
 if __name__ == "__main__":
 
-    sf_agent = AgentBase(Knowledge(),Interpreter(), Actuator(), Experiences())
+    sf_agent = agent_class(AGENT_MODULE, AGENT_CLASS)()
 
     for episode in range(EPISODES):
         game_finished = False
@@ -35,6 +40,8 @@ if __name__ == "__main__":
             action = sf_agent.get_action(_obs)
 
             _next_obs, _rew, _done, _info = env.step(action)
+
+            sf_agent.add_experience(_obs, _rew, action, _next_obs, info=_info)
 
             _obs = _next_obs
             game_finished = _done or step > STEPS_PER_EPISODE

@@ -1,9 +1,6 @@
-from sensor import Sensor
-
-class Interpreter:
+class KnowledgeBase:
     
     def __init__(self):
-        self.sensor = Sensor()
         pass
 
     def get_action(self):
