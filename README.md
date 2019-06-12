@@ -40,6 +40,12 @@ conda env create -f madrl_retro_gym_conda_env.yml
 
 ## Run
 
+Firs of all, ensure you have the right conda environment active:
+
+```
+conda activate madrl_sfii_retro_gym
+```
+
 Default AGENT is inside **algorithms/_new_template** so the command to run the agent is:
 
 ```
