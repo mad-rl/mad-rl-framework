@@ -1,13 +1,9 @@
-import gym
 import numpy as np
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import torch.optim as optim
-
 from torch.distributions.categorical import Categorical
-from agent_base.knowledge_base import KnowledgeBase
-
 
 class CnnNetwork(nn.Module):
     def __init__(self):
@@ -36,12 +32,11 @@ class CnnNetwork(nn.Module):
         value  = self.critic(x)
 
         return policy, value
+        
+class Knowledge():
 
-
-class Knowledge(KnowledgeBase):
     def __init__(self, action_space):
-        KnowledgeBase.__init__(self, action_space)
-
+        self.action_space = action_space
         self.model = CnnNetwork()
         self.model.double()
 
@@ -52,13 +47,13 @@ class Knowledge(KnowledgeBase):
         self.learning_rate = 0.00001
 
         self.optimizer = optim.Adam(
-            self.model.parameters(), lr=self.learning_rate)
+            self.model.parameters(), lr=self.learning_rate
+        )
         self.model = self.model.to('cpu')
 
     def get_action(self, state):
         policy, _ = self.model(torch.tensor(state).unsqueeze(0))
         action = F.softmax(policy, -1).multinomial(num_samples=1)
-
         return action
 
     def train(self, experiences):

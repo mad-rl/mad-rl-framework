@@ -1,7 +1,9 @@
-Street Fighter 2 Gym Retro Environment
+MAD_RL_ Framework
 ===
 
-This environment uses OpenAI Gym Retro to allow implement RL algorithms easily for the Genesis version of Street Fighter 2.
+This framework borned in paralel to the starting of the [MAD_RL_](https://www.meetup.com/MAD_RL/) collective. A group of people interested on Reinforcement Learning area within Artificial Intelligence. MAD_RL_ shares the idea that RL and other semi-supervised learning techniques will require experience from many different fields to evolve. Some obvious such as Mathematics or Software Engineering, but also others less obvious such as Psychology, Neuroscience and others even more distant as Philosophy or Sociology, just to name a few.
+
+The goal of this framework is to allow researchers and practiotioners to have a pretty clear architecture from the point of view of the RL concepts, and also beaing totally agnostic from libraries and environments.
 
 ## Architecture
 
@@ -9,15 +11,20 @@ We have split the environment in different components trying to simplify the imp
 
 The main idea of this approach is to ensure that the agent will be trained in a way that will work in an inference environment. This is very important because depending on the context the agent won't access to the same information during the training than in the runtime.
 
+### Training Loop
 ![RL Agent Environment Training Loop](./images/mad_rl_scheme_training.png)
 
-
+### Runtime
 ![RL Agent Environment Runtime](./images/mad_rl_scheme_runtime.png)
 
 
 ### Components Summary
 
 The components we have split the framework are:
+
+#### The Environment
+ * **Environment:** An environment define the rules where the agents will interact.
+ 
 
 #### The Agent
 
@@ -38,29 +45,35 @@ In this case we have implemented the framwork using OpenAI Gym creating a train 
 conda env create -f madrl_retro_gym_conda_env.yml
 ```
 
-## Run
+### Test installation
 
 Firs of all, ensure you have the right conda environment active:
 
 ```
-conda activate madrl_sfii_retro_gym
+conda activate mad_rl_framework
 ```
 
-Default AGENT is inside **algorithms/_new_template** so the command to run the agent is:
+A default AGENT and ENVIRONMENT are inside **environments/_new_env_template**, you can test it with the following command:
 
 ```
-PYTHONPATH=./src/ python ./src/algorithms/_new_template/train_agent.py
+PYTHONPATH=./src/ AGENT_MODULE=environments._new_env_template._new_agent.agent python ./src/environments/_new_env_template/train_agent.py
 ```
 
-In order to run another agent, for instance the Breakout Actor-Critic Policy Agent, the command to run it is:
+## Create your own Agent for an existing Environment
+
+In order to create a new agent, copy the entire folder **./src/environments/_new_template/** and rename it with yours, implement your algorithm and run it using the same command but changing the module and path for yours, eg:
 
 ```
-PYTHONPATH=./src/ AGENT_MODULE=algorithms.breakout_actor_critic_policy.agent python ./src/algorithms/breakout_actor_critic_policy/train_agent.py
+cp ./src/agents/_new_template/ ./src/agents/my_environment/my_agent/
+PYTHONPATH=./src/ AGENT_MODULE=agents.my_environment.my_agent.agent python ./src/agent/my_environment/train_agent.py
 ```
 
-In order to create a new agent, copy the entire folder **./src/algorithms/_new_template/** and rename it with yours, implement your algorithm and run it using the same command but changing the module and path for yours, eg:
+You can also find agents already implemented for Gym such as Breakout Actor-Critic Policy Agent, the command to run it is:
 
 ```
-cp ./src/algorithms/_new_template/ ./src/algorithms/my_algorithm/
-PYTHONPATH=./src/ AGENT_MODULE=algorithms.my_algorithm.agent python ./src/algorithms/my_algorithm/train_agent.py
+PYTHONPATH=./src/ GAME=Break AGENT_MODULE=agents.gym.breakout_actor_critic_policy.agent python ./src/agents/gym/train_agent.py
 ```
+
+## Create your own Environment
+
+
