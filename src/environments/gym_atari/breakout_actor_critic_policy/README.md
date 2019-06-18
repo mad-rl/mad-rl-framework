@@ -1,9 +1,9 @@
-Gym Atari Breakout Actor-Critic Agent with Policy Grading
+Gym Atari Breakout Actor-Critic Agent with Policy Gradient
 ===
 
 ## Install dependencies
 
-There is an conda env file with the dependencies for run this agent
+There is a conda env file with the dependencies for running this agent
 
 ```
 conda env update -f ./breakout_actor_critic_policy_env.yml
