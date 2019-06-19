@@ -5,40 +5,44 @@
 '''
 
 from core.mad_rl import MAD_RL
-from test_env import Test_Env
+from environments._test_env.test_env import Test_Env
 
-config = MAD_RL.config()
+class Environment:
 
-env = Test_Env(config["game"])
-agent = MAD_RL.agent(action_space=env.action_space)
+    def __init__(self):
+        pass
 
-if __name__ == "__main__":
+    def run(self):
+        config = MAD_RL.config()
+        env = Test_Env()
 
-    for episode in range(config["episodes"]):
-        game_finished = False
-        env.reset()
+        agent = MAD_RL.agent(action_space=env.action_space)
 
-        agent.start_episode(episode)
+        for episode in range(config["episodes"]):
+            game_finished = False
+            env.reset()
 
-        step = 0
-        while not game_finished:
-            for step in range(config["steps_per_episode"]):
-                agent.start_step(step)
+            agent.start_episode(episode)
 
-                observation = env.get_observation()
-                action = agent.get_action(observation)
+            step = 0
+            while not game_finished:
+                for step in range(config["steps_per_episode"]):
+                    agent.start_step(step)
 
-                next_observation, reward, game_finished = env.next_step(action)
+                    observation = env.get_observation()
+                    action = agent.get_action(observation)
 
-                agent.add_experience(observation, reward, action, next_observation)
-                agent.end_step(step)
+                    next_observation, reward, game_finished = env.next_step(action)
 
-                step = step +1
+                    agent.add_experience(observation, reward, action, next_observation)
+                    agent.end_step(step)
+
+                    step = step +1
+                    
+                    if game_finished:
+                        break
                 
-                if game_finished:
-                    break
+                agent.train()
             
-            agent.train()
-        
-        agent.end_episode(episode)
+            agent.end_episode(episode)
 

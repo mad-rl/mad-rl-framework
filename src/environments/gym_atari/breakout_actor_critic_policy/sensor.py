@@ -8,6 +8,7 @@ class Sensor():
         self.data = self.preprocess_obs(observation)
 
     def preprocess_obs(self, observation):
+        print(observation)
         image = Image.fromarray(observation).convert('L')
         image = image.resize((self.width, self.height))
         image_array = np.array(image).astype('float32')

@@ -3,42 +3,48 @@ import gym
 
 from core.mad_rl import MAD_RL
 
-config = MAD_RL.config()
+class Environment:
 
-env = gym.make(config['game'])
-agent = MAD_RL.agent(action_space=env.action_space)
+    def __init__(self):
+        pass
 
-ENV_RENDER = os.getenv('ENV_RENDER', True)
+    def run(self):
 
-if __name__ == "__main__":
+        config = MAD_RL.config()
 
-    for episode in range(config["episodes"]):
-        game_finished = False
-        env.reset()
+        GAME = os.getenv('GAME', "")
+        ENV_RENDER = os.getenv('ENV_RENDER', True)
 
-        agent.start_episode(episode)
+        env = gym.make(GAME)
+        agent = MAD_RL.agent(action_space=env.action_space)
 
-        step = 0
-        while not game_finished:
-            for step in range(config["steps_per_episode"]):
-                agent.start_step(step)
+        for episode in range(config["episodes"]):
+            game_finished = False
+            env.reset()
 
-                observation = env.render(mode='rgb_array')
-                action = agent.get_action(observation)
+            agent.start_episode(episode)
 
-                next_observation, reward, game_finished, _info = env.step(action)
+            step = 0
+            while not game_finished:
+                for step in range(config["steps_per_episode"]):
+                    agent.start_step(step)
 
-                if ENV_RENDER:
-                    env.render()
+                    observation = env.render(mode='rgb_array')
+                    action = agent.get_action(observation)
 
-                agent.add_experience(observation, reward, action, next_observation)
-                agent.end_step(step)
+                    next_observation, reward, game_finished, _info = env.step(action)
 
-                step = step +1
+                    if ENV_RENDER:
+                        env.render()
+
+                    agent.add_experience(observation, reward, action, next_observation)
+                    agent.end_step(step)
+
+                    step = step +1
+                    
+                    if game_finished:
+                        break
                 
-                if game_finished:
-                    break
+                agent.train()
             
-            agent.train()
-        
-        agent.end_episode(episode)
+            agent.end_episode(episode)
