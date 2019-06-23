@@ -58,37 +58,8 @@ The OpenAI Gym is one of the standars to apply RL algorithms in videogames. This
 
 [Gym Atari](./src/environments/gym_atari/README.md)
 
-### Installation
-
-```
-conda env update -f ./environments/gym_atari/madrl_gym_atari_env.yml
-```
-
-### Agents
-
-#### Breakout Actor-Critic Policy Gradient
-
-```
-PYTHONPATH=./src/ GAME=BreakoutDeterministic-v4 AGENT_MODULE=environments.gym_atari.breakout_actor_critic_policy.agent python ./src/environments/gym_atari/train_agent.py
-```
-
-#### Breakout Actor-Critic DQN
-
-```
-PYTHONPATH=./src/ GAME=BreakoutDeterministic-v4 AGENT_MODULE=environments.gym.breakout_actor_critic_policy.agent python ./src/environments/gym/train_agent.py
-```
-
 ### Gym Retro
 
 The OpenAI Gym Retro is the same than Gym Atari but using 8bit/16bit consoles emulators to apply RL algorithms in that videogames.
 
 [Gym Retro](./src/environments/gym_retro/README.md)
-
-### Agents
-
-#### Street Fighter II
-
-```
-PYTHONPATH=./src/ GAME=StreetFighterIISE AGENT_MODULE=environments.gym_retro.sfii_a3c.agent python ./src/environments/gym_retro/train_agent.py
-```
-
