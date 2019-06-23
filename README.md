@@ -22,8 +22,8 @@ The main idea of this approach is to isolate the different components to ley the
 
 The components we have split the framework are:
 
-#### The Environment
- * **Environment:** An environment define the rules where the agents will interact. We currently have Gym[Atari] and Retro already implemented with several agents and algorithms working.
+#### The Environment Engine
+ * **Engine:** An engine define how the agents will interact with the environment. We currently have Gym[Atari] and Retro already implemented with several agents and algorithms working.
 
 #### The Agent
 
@@ -36,15 +36,18 @@ The components we have split the framework are:
 
 ## Installation
 
-### Conda environemnts
+### Engine requirements
+
+Each engine has its own requirements. We recommend to use a virtual environment such a pipenv, virtualenv or conda in order to isolate the specific requirements of each engine from your current libraries or other engines.
+
 ```
-conda env create -f madrl_env.yml
+pip install -f ./src/environments/{environment_name}/requirements.txt
 ```
 
 ### Test the environment
 
 ```
-PYTHONPATH=./src/ AGENT_MODULE=environments._test_env._test_agent.agent python ./src/environments/_test_env/train_agent.py
+PYTHONPATH=./src/ ENGINE_MODULE=environments._test_env.test_engine AGENT_MODULE=environments._test_env._test_agent.agent python ./src/environments/main.py
 ```
 
 ## Environments
@@ -53,42 +56,14 @@ PYTHONPATH=./src/ AGENT_MODULE=environments._test_env._test_agent.agent python .
 
 The OpenAI Gym is one of the standars to apply RL algorithms in videogames. This enviroment is focused on Atari games.
 
-### Installation
-
-```
-conda env update -f ./environments/gym_atari/madrl_gym_atari_env.yml
-```
-
-### Agents
-
-#### Breakout Actor-Critic Policy Grading
-
-```
-PYTHONPATH=./src/ GAME=BreakoutDeterministic-v4 AGENT_MODULE=environments.gym_atari.breakout_actor_critic_policy.agent python ./src/environments/gym_atari/train_agent.py
-```
-
-#### Breakout Actor-Critic DQN
-
-```
-PYTHONPATH=./src/ GAME=BreakoutDeterministic-v4 AGENT_MODULE=environments.gym.breakout_actor_critic_policy.agent python ./src/environments/gym/train_agent.py
-```
+[Gym Atari](./src/environments/gym_atari/README.md)
 
 
 ### Gym Retro
 
 The OpenAI Gym Retro is the same than Gym Atari but using 8bit/16bit consoles emulators to apply RL algorithms in that videogames.
 
-### Installation
-
-```
-conda env update -f ./environments/gym_retro/madrl_gym_retro_env.yml
-```
-
-You will need to find the video game ROM and download it before running any agent. In order to load the ROM into Retro please follow these instrucions:
-
-```
-...
-```
+[Gym Retro](./src/environments/gym_retro/README.md)
 
 ### Agents
 

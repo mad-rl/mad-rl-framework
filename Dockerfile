@@ -16,12 +16,12 @@ ENV PYTHONPATH /mad_rl/src/
 
 CMD [ "python3.6", "/mad_rl/src/environments/main.py" ]
 
-# docker run -e ENV_RENDER=False -e TRAINING_MODULE=environments.gym_atari.train_agent e- AGENT_MODULE=environments.gym_atari.breakout_actor_critic_policy.agent e- GAME=BreakoutDeterministic-v4 mad_rl:0.1.4
+# docker run -e ENV_RENDER=False -e ENV_MODULE=environments.gym_atari.train_agent e- AGENT_MODULE=environments.gym_atari.breakout_actor_critic_policy.agent e- GAME=BreakoutDeterministic-v4 mad_rl:0.1.4
 
 # docker run -e GAME=BreakoutDeterministic-v4 -e ENV_RENDER=False mad_rl:0.1.3
 
-# docker run -e ENV_RENDER=False -e TRAINING_MODULE=environments.gym_atari.train_agent AGENT_MODULE=environments.gym_atari.breakout_actor_critic_policy.agent -e GAME=BreakoutDeterministic-v4 mad_rl:0.1.5
+# docker run -e ENV_RENDER=False -e ENV_MODULE=environments.gym_atari.train_agent AGENT_MODULE=environments.gym_atari.breakout_actor_critic_policy.agent -e GAME=BreakoutDeterministic-v4 mad_rl:0.1.5
 
-# PYTHONPATH=./src/ TRAINING_MODULE=environments.gym_atari.train_agent AGENT_MODULE=environments.gym_atari.breakout_actor_critic_policy.agent GAME=BreakoutDeterministic-v4 python3.6 ./src/environments/main.py
+# PYTHONPATH=./src/ ENV_MODULE=environments.gym_atari.train_agent AGENT_MODULE=environments.gym_atari.breakout_actor_critic_policy.agent GAME=BreakoutDeterministic-v4 python3.6 ./src/environments/main.py
 
-# TRAINING_MODULE=environments.gym_atari.train_agent AGENT_MODULE=environments.gym_atari.breakout_actor_critic_policy.agent GAME=BreakoutDeterministic-v4 /usr/bin/xvfb-run -s '-screen 0 1024x768x16' python3.6 /mad_rl/src/environments/main.py
+# ENV_MODULE=environments.gym_atari.train_agent AGENT_MODULE=environments.gym_atari.breakout_actor_critic_policy.agent GAME=BreakoutDeterministic-v4 /usr/bin/xvfb-run -s '-screen 0 1024x768x16' python3.6 /mad_rl/src/environments/main.py
