@@ -58,7 +58,7 @@ The OpenAI Gym is one of the standars to apply RL algorithms in videogames. This
 
 [Gym Atari](./src/environments/gym_atari/README.md)
 
-### Gym Retro
+### (Work in Progress) Gym[Retro]
 
 The OpenAI Gym Retro is the same than Gym Atari but using 8bit/16bit consoles emulators to apply RL algorithms in that videogames.
 
