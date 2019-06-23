@@ -6,9 +6,8 @@
 
 class Test_Env():
 
-    def __init__(self, game_name):
+    def __init__(self):
         self.action_space = [1]
-        self.game_name = game_name
         self.next_observation = []
         self.reward = 0
         self.game_finished = False
