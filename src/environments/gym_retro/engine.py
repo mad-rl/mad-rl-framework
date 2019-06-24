@@ -1,5 +1,5 @@
 import os
-import gym
+import retro
 
 from core.mad_rl import MAD_RL
 
@@ -16,8 +16,8 @@ class Engine:
         GAME = os.getenv('GAME', "")
         ENV_RENDER = os.getenv('ENV_RENDER', True)
 
-        env = gym.make(GAME)
-        agent = MAD_RL.agent(action_space=env.action_space)
+        env = retro.make(GAME)
+        agent = MAD_RL.agent()
 
         for episode in range(config["episodes"]):
             game_finished = False
@@ -40,7 +40,7 @@ class Engine:
                         env.render()
 
                     agent.add_experience(
-                        observation, reward, action, next_observation, info)
+                        observation, reward, action, next_observation, info=info)
                     agent.end_step(step)
 
                     step = step + 1
@@ -59,8 +59,8 @@ class Engine:
         GAME = os.getenv('GAME', "")
         ENV_RENDER = os.getenv('ENV_RENDER', True)
 
-        env = gym.make(GAME)
-        agent = MAD_RL.agent(action_space=env.action_space)
+        env = retro.make(GAME)
+        agent = MAD_RL.agent()
 
         for episode in range(config["episodes"]):
             game_finished = False

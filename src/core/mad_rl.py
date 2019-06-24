@@ -37,7 +37,7 @@ class MAD_RL:
         return environment_class()
 
     @staticmethod
-    def agent(module=None, class_name=None, action_space=[]):
+    def agent(module=None, class_name=None, action_space=None):
         config = MAD_RL.config()
         if module == None:
             module = config["agent"]["module"]
