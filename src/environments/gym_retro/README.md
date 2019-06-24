@@ -1,4 +1,4 @@
-Gym Atari Breakout Actor-Critic Agent with Policy Grading
+Gym Retro
 ===
 
 ## Install dependencies
@@ -11,8 +11,8 @@ pip install -f ./src/environments/gym_retro/requirements.txt
 
 ### Agents
 
-#### SFII Asynchronous Actor-Critic
+#### SFII Actor-Critic
 
 ```
-PYTHONPATH=./src/ ENGINE_MODULE=environments.gym_retro.engine AGENT_MODULE=environments.gym_retro.sfii_a3c.agent GAME=StreetFighterIISpecialChampionEdition-Genesis python3.6 ./src/environments/main.py
+PYTHONPATH=./src/ ENGINE_MODULE=environments.gym_retro.engine AGENT_MODULE=environments.gym_retro.sf2_actor_critic_policy.agent GAME=StreetFighterIISpecialChampionEdition-Genesis python ./src/environments/main.py
 ```

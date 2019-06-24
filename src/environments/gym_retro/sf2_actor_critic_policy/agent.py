@@ -7,9 +7,13 @@ from .experiences import Experiences
 
 class Agent():
 
-    def __init__(self, action_space):
+    def __init__(self, action_space=None):
+        if action_space is None:
+            self.action_space = 49
+        else:
+            self.action_space = action_space
         self.input_frames = 16
-        self.knowledge = Knowledge(self.input_frames, action_space)
+        self.knowledge = Knowledge(self.input_frames, self.action_space)
         self.interpreter = Interpreter(frames=self.input_frames, width=80, height=80)
         self.actuator = Actuator()
         self.experiences = Experiences()
