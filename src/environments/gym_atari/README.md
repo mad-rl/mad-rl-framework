@@ -1,4 +1,4 @@
-Gym Atari Breakout Actor-Critic Agent with Policy Grading
+Gym Atari Breakout Actor-Critic Agent with Policy Gradient
 ===
 
 ## Install dependencies
@@ -11,7 +11,7 @@ pip install -f ./src/environments/gym_atari/requirements.txt
 
 ### Agents
 
-#### Breakout Actor-Critic Policy Grading
+#### Breakout Actor-Critic Policy Gradient
 
 ```
 PYTHONPATH=./src/ ENGINE_MODULE=environments.gym_atari.engine AGENT_MODULE=environments.gym_atari.breakout_actor_critic_policy.agent GAME=BreakoutDeterministic-v4 python3.6 ./src/environments/main.py
