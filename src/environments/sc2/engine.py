@@ -1,6 +1,6 @@
 import os
 
-from sc2_env import SC2Env
+from .sc2_env import SC2Env
 from core.mad_rl import MAD_RL
 
 
@@ -13,9 +13,7 @@ class Engine:
 
         config = MAD_RL.config()
 
-        LOCAL_MAP = os.getenv('LOCAL_MAP', True)
-
-        env = SC2Env().start(localMap=LOCAL_MAP)
+        env = SC2Env().start()
         agent = MAD_RL.agent()
 
         for episode in range(config["episodes"]):
@@ -32,11 +30,11 @@ class Engine:
                     observation = env.get_observation()
                     action = agent.get_action(observation)
 
-                    next_observation, reward, game_finished, info = env.step(
+                    next_observation, reward, game_finished = env.step(
                         action)
 
                     agent.add_experience(
-                        observation, reward, action, next_observation, info=info)
+                        observation, reward, action, next_observation)
                     agent.end_step(step)
 
                     step = step + 1

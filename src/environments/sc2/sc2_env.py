@@ -23,11 +23,12 @@ class SC2Env():
         res.ParseFromString(result_raw)
         return res
 
-    def start(self, localMap='mini_games/MoveToBeacon.SC2Map', race=s2common.Race.Value('Terran')):
+    def start(self, local_map='mini_games/MoveToBeacon.SC2Map', race=s2common.Race.Value('Terran')):
+        print(local_map, race)
         self.__request_proto__(
             "ping", s2api.RequestPing(), s2api.ResponsePing())
 
-        createGame = s2api.RequestCreateGame(local_map={'map_path': localMap}, player_setup=[
+        createGame = s2api.RequestCreateGame(local_map={'map_path': local_map}, player_setup=[
                                              {'type': s2api.PlayerType.Value('Participant'), 'race': race}], realtime=False)
         self.__request_proto__("create_game", createGame,
                                s2api.ResponseCreateGame())
