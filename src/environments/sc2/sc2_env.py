@@ -37,8 +37,10 @@ class SC2Env():
             race=race, options={'raw': True, 'score': True})
         self.__request_proto__("join_game", joinGame, s2api.ResponseJoinGame())
 
-    def step(self, action):
-        self.next_observation.append(1)
+    def step(self):
+        # todo call action
+        observation = self.get_observation()
+        self.next_observation.append(observation)
         if len(self.next_observation) > 100:
             self.game_finished = True
         self.reward = self.reward + 0.01
@@ -50,4 +52,5 @@ class SC2Env():
         self.game_finished = False
 
     def get_observation(self):
-        return []
+        return self.__request_proto__(
+            "observation", s2api.RequestObservation(), s2api.ResponseObservation())
