@@ -1,0 +1,223 @@
+--player--
+player_id: 1
+minerals: 0
+vespene: 0
+food_cap: 0
+food_used: 1
+food_army: 1
+food_workers: 0
+idle_worker_count: 0
+army_count: 1
+warp_gate_count: 0
+--units--
+[display_type: Visible
+alliance: Self
+tag: 4298899457
+unit_type: 48
+owner: 1
+pos {
+  x: 29.830810546875
+  y: 21.01806640625
+  z: 7.99609375
+}
+facing: 3.3198108673095703
+radius: 0.375
+build_progress: 1.0
+cloak: NotCloaked
+is_selected: false
+is_on_screen: true
+is_blip: false
+health: 45.0
+health_max: 45.0
+shield: 0.0
+energy: 0.0
+is_flying: false
+is_burrowed: false
+orders {
+  ability_id: 16
+  target_world_space_pos {
+    x: 4.006591796875
+    y: 17.953857421875
+  }
+}
+orders {
+  ability_id: 16
+  target_world_space_pos {
+    x: 55.754150390625
+    y: 8.04736328125
+  }
+}
+orders {
+  ability_id: 16
+  target_world_space_pos {
+    x: 29.85107421875
+    y: 58.183349609375
+  }
+}
+orders {
+  ability_id: 16
+  target_world_space_pos {
+    x: 14.240966796875
+    y: 28.8876953125
+  }
+}
+orders {
+  ability_id: 16
+  target_world_space_pos {
+    x: 31.18115234375
+    y: 5.19091796875
+  }
+}
+assigned_harvesters: 0
+ideal_harvesters: 0
+weapon_cooldown: 0.0
+shield_max: 0.0
+energy_max: 0.0
+, display_type: Visible
+alliance: Neutral
+tag: 4299161601
+unit_type: 317
+owner: 16
+pos {
+  x: 30.527587890625
+  y: 33.170166015625
+  z: 7.99609375
+}
+facing: 4.71238899230957
+radius: 1.875
+build_progress: 1.0
+cloak: NotCloaked
+is_selected: false
+is_on_screen: true
+is_blip: false
+health: 25.0
+health_max: 25.0
+shield: 0.0
+energy: 0.0
+is_flying: false
+is_burrowed: false
+shield_max: 0.0
+energy_max: 0.0
+]--score--
+score_type: Curriculum
+score: 0
+score_details {
+  idle_production_time: 0.0
+  idle_worker_time: 0.0
+  total_value_units: 50.0
+  total_value_structures: 0.0
+  killed_value_units: 0.0
+  killed_value_structures: 0.0
+  collected_minerals: 0.0
+  collected_vespene: 0.0
+  collection_rate_minerals: 0.0
+  collection_rate_vespene: 0.0
+  spent_minerals: 0.0
+  spent_vespene: 0.0
+  food_used {
+    none: 0.0
+    army: 1.0
+    economy: 0.0
+    technology: 0.0
+    upgrade: 0.0
+  }
+  killed_minerals {
+    none: 0.0
+    army: 0.0
+    economy: 0.0
+    technology: 0.0
+    upgrade: 0.0
+  }
+  killed_vespene {
+    none: 0.0
+    army: 0.0
+    economy: 0.0
+    technology: 0.0
+    upgrade: 0.0
+  }
+  lost_minerals {
+    none: 0.0
+    army: 0.0
+    economy: 0.0
+    technology: 0.0
+    upgrade: 0.0
+  }
+  lost_vespene {
+    none: 0.0
+    army: 0.0
+    economy: 0.0
+    technology: 0.0
+    upgrade: 0.0
+  }
+  friendly_fire_minerals {
+    none: 0.0
+    army: 0.0
+    economy: 0.0
+    technology: 0.0
+    upgrade: 0.0
+  }
+  friendly_fire_vespene {
+    none: 0.0
+    army: 0.0
+    economy: 0.0
+    technology: 0.0
+    upgrade: 0.0
+  }
+  used_minerals {
+    none: 0.0
+    army: 50.0
+    economy: 0.0
+    technology: 0.0
+    upgrade: 0.0
+  }
+  used_vespene {
+    none: 0.0
+    army: 0.0
+    economy: 0.0
+    technology: 0.0
+    upgrade: 0.0
+  }
+  total_used_minerals {
+    none: 0.0
+    army: 50.0
+    economy: 0.0
+    technology: 0.0
+    upgrade: 0.0
+  }
+  total_used_vespene {
+    none: 0.0
+    army: 0.0
+    economy: 0.0
+    technology: 0.0
+    upgrade: 0.0
+  }
+  total_damage_dealt {
+    life: 0.0
+    shields: 0.0
+    energy: 0.0
+  }
+  total_damage_taken {
+    life: 0.0
+    shields: 0.0
+    energy: 0.0
+  }
+  total_healed {
+    life: 0.0
+    shields: 0.0
+    energy: 0.0
+  }
+}
+--map--
+bits_per_pixel: 24
+size {
+  x: 640
+  y: 480
+}
+data: ""
+--minimap--
+bits_per_pixel: 24
+size {
+  x: 128
+  y: 128
+}
+data: ""
