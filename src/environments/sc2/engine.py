@@ -1,11 +1,8 @@
-import os
-
 from .sc2_env import SC2Env
 from core.mad_rl import MAD_RL
 
 
 class Engine:
-
     def __init__(self):
         pass
 
@@ -34,11 +31,11 @@ class Engine:
 
                     next_observation, reward, game_finished = env.step(action)
 
-                    env.render()
-
                     agent.add_experience(
                         observation, reward, action, next_observation)
                     agent.end_step(step)
+
+                    env.render()
 
                     step = step + 1
 
