@@ -58,7 +58,7 @@ class Engine:
 
         config = MAD_RL.config()
         game = os.getenv('GAME', "")
-        env_render = os.getenv('ENV_RENDER', True)
+        env_render = os.getenv('ENV_RENDER', False)
         number_of_workers = os.getenv('NUMBER_WORKERS', 4)
 
         processes = []
