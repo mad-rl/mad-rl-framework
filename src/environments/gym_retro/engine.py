@@ -14,7 +14,7 @@ class Engine:
         config = MAD_RL.config()
 
         GAME = os.getenv('GAME', "")
-        ENV_RENDER = os.getenv('ENV_RENDER', True)
+        ENV_RENDER = os.getenv('ENV_RENDER', False)
 
         env = retro.make(GAME)
         agent = MAD_RL.agent()
@@ -40,7 +40,8 @@ class Engine:
                         env.render()
 
                     agent.add_experience(
-                        observation, reward, action, next_observation, info=info)
+                        observation, reward, action, next_observation,
+                        info=info)
                     agent.end_step(step)
 
                     step = step + 1
@@ -57,7 +58,7 @@ class Engine:
         config = MAD_RL.config()
 
         GAME = os.getenv('GAME', "")
-        ENV_RENDER = os.getenv('ENV_RENDER', True)
+        ENV_RENDER = os.getenv('ENV_RENDER', False)
 
         env = retro.make(GAME)
         agent = MAD_RL.agent()
