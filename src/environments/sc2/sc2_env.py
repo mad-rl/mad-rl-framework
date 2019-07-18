@@ -4,7 +4,7 @@ from s2clientprotocol import sc2api_pb2 as s2api
 from s2clientprotocol import common_pb2 as s2common
 from s2clientprotocol import raw_pb2 as s2raw
 
-from .base_agent.sensor import SC2EnvObservation
+from .move_to_beacon_actor_critic_agent.sensor import SC2EnvObservation
 
 
 class SC2Env():
@@ -58,6 +58,13 @@ class SC2Env():
 
         return observation
 
+    def __call_restart_game__(self):
+        self.__request_proto__(
+            "restart_game",
+            s2api.RequestRestartGame(),
+            s2api.ResponseRestartGame()
+        )
+
     def start(self, local_map='MoveToBeacon.SC2Map',
               race=s2common.Race.Value('Terran')):
         print(local_map, race)
@@ -106,6 +113,7 @@ class SC2Env():
         self.__call_step__()
 
         observation = self.__call_observation__()
+        self.game_finished = observation.status == 5
         self.save_observation(observation)
 
         observation = SC2EnvObservation(observation)
@@ -113,15 +121,14 @@ class SC2Env():
         self.last_observation = observation
         self.reward += observation.score.score
 
-        if len(self.next_observation) > 10:
-            self.game_finished = True
-
         return self.last_observation, self.reward, self.game_finished
 
     def reset(self):
         self.next_observation = []
         self.reward = 0
         self.game_finished = False
+
+        self.__call_restart_game__()
 
     def get_observation(self):
         return SC2EnvObservation(self.__call_observation__())
