@@ -17,6 +17,10 @@ class Agent():
         self.actuator = Actuator()
         self.experiences = Experiences()
 
+        self.total_steps = 0
+        self.max_reward = 0
+        self.rewards = []
+
     def get_action(self, observation):
         state = self.interpreter.obs_to_state(observation)
         agent_action = self.knowledge.get_action(state)
@@ -27,19 +31,29 @@ class Agent():
         state = self.interpreter.obs_to_state(observation)
         next_state = self.interpreter.obs_to_state(next_observation)
         self.experiences.add(state, reward, agent_action, next_state)
+        self.rewards.append(reward)
 
     def start_step(self, current_step):
         pass
 
     def end_step(self, current_step):
-        pass
+        self.episode_steps = self.episode_steps + 1
+        self.total_steps = self.total_steps + 1
 
     def start_episode(self, current_episode):
         print('episode', current_episode)
-        pass
+        self.episode_steps = 0
 
     def end_episode(self, current_episode):
-        pass
+        episode_reward = sum(self.rewards)
+        if episode_reward > self.max_reward:
+            self.max_reward = episode_reward
+        print("Episode:", current_episode,
+              ", episode_reward:", episode_reward,
+              ", max_reward:", self.max_reward,
+              ", episode_steps:", self.episode_steps,
+              ", total_steps:", self.total_steps)
+        self.rewards = []
 
     def train(self):
         self.knowledge.train(self.experiences.get())
