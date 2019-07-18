@@ -6,6 +6,7 @@ CONFIG = {
     "test": bool(os.getenv('TEST', False)),
     "episodes": int(os.getenv('EPISODES', 10)),
     "steps_per_episode": int(os.getenv('STEPS_PER_EPISODE', 100)),
+    "debug": bool(os.getenv('DEBUG', False)),
     "engine": {
         "module": os.getenv('ENGINE_MODULE', 'environments._test_env.test_engine'),
         "class": os.getenv('ENGINE_CLASS', 'Engine')
@@ -46,3 +47,9 @@ class MAD_RL:
         agent_mod = __import__(module, fromlist=["*"])
         agent_class = getattr(agent_mod, class_name)
         return agent_class(action_space)
+
+    @staticmethod
+    def debug(message):
+        config = MAD_RL.config()
+        if config["debug"] is True:
+            print(message)

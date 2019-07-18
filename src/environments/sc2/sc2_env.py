@@ -1,10 +1,39 @@
+from core.mad_rl import MAD_RL
 from PIL import Image
 from websocket import create_connection
 from s2clientprotocol import sc2api_pb2 as s2api
 from s2clientprotocol import common_pb2 as s2common
 from s2clientprotocol import raw_pb2 as s2raw
 
-from .move_to_beacon_actor_critic_agent.sensor import SC2EnvObservation
+
+class SC2EnvObservation():
+    def __init__(self, observation=None):
+        if observation is None:
+            self.player = None
+            self.units = None
+            self.score = None
+            self.map = None
+            self.minimap = None
+        else:
+            self.player = observation.observation.observation.player_common
+            self.units = observation.observation.observation.raw_data.units
+            self.score = observation.observation.observation.score
+            self.map = observation.observation.observation.render_data.map
+            self.minimap = (
+                observation.observation.observation.render_data.minimap)
+
+    def info(self):
+        return """--player--\n{}--units--\n{}--score
+                  --\n{}--map--\n{}--minimap--\n{}""".format(
+            self.player, self.units, self.score,
+            self.map, self.minimap)
+
+    def own_units(self):
+        own_units = []
+        for unit in self.units:
+            if unit.owner == self.player.player_id:
+                own_units.append(unit)
+        return own_units
 
 
 class SC2Env():
@@ -26,6 +55,7 @@ class SC2Env():
         result_raw = self._ws.recv()
         res = s2api.Response(**{service: protoResponse})
         res.ParseFromString(result_raw)
+        MAD_RL.debug(res)
         return res
 
     def __call_action__(self, ability_id, unit_tags, target_world_space_pos):
