@@ -44,8 +44,8 @@ class SC2Env():
 
         self.action_space = [1]
         self.next_observation = []
-        self.reward = 0
         self.game_finished = False
+        self.reward = 0
 
         self.last_observation = SC2EnvObservation()
 
@@ -62,7 +62,7 @@ class SC2Env():
         actionRawUnitCommand = s2raw.ActionRawUnitCommand(
             ability_id=ability_id,
             unit_tags=unit_tags,
-            queue_command=True,
+            queue_command=False,
             target_world_space_pos=target_world_space_pos
         )
         actionRaw = s2raw.ActionRaw(unit_command=actionRawUnitCommand)
@@ -149,14 +149,20 @@ class SC2Env():
         observation = SC2EnvObservation(observation)
         self.next_observation.append(observation)
         self.last_observation = observation
-        self.reward += observation.score.score
+        reward = observation.score.score
 
-        return self.last_observation, self.reward, self.game_finished
+        if self.reward != reward:
+            self.reward = reward
+            reward = 1
+        else:
+            reward = 0
+
+        return self.last_observation, reward, self.game_finished
 
     def reset(self):
         self.next_observation = []
-        self.reward = 0
         self.game_finished = False
+        self.reward = 0
 
         self.__call_restart_game__()
 
@@ -179,8 +185,6 @@ class SC2Env():
         img.save("./src/environments/sc2/renders/observation_minimap_data.png")
 
         file1 = open("./src/environments/sc2/renders/observation.info", "w")
-        observation.map.data = b''
-        observation.minimap.data = b''
         file1.write(observation.info())
         file1.close()
 
