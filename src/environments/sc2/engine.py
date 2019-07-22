@@ -19,15 +19,14 @@ class Engine:
             env.reset()
 
             agent.start_episode(episode)
+            observation = env.get_observation()
 
             step = 0
             while not game_finished:
+                action = agent.get_action(observation)
+
                 for step in range(config["steps_per_episode"]):
                     agent.start_step(step)
-
-                    observation = env.get_observation()
-
-                    action = agent.get_action(observation)
 
                     next_observation, reward, game_finished = env.step(action)
 
@@ -37,6 +36,7 @@ class Engine:
 
                     env.render()
 
+                    observation = next_observation
                     step = step + 1
 
                     if game_finished:
