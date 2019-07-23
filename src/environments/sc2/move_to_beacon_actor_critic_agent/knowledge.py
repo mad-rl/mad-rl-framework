@@ -15,25 +15,23 @@ class ActorCritic(torch.nn.Module):
         self.conv1 = nn.Conv2d(num_inputs, 32, kernel_size=2,
                                stride=2, padding=1)
         self.conv2 = nn.Conv2d(32, 32, kernel_size=2, stride=2, padding=1)
-        self.conv3 = nn.Conv2d(32, 32, kernel_size=2, stride=2, padding=1)
-        self.conv4 = nn.Conv2d(32, 32, kernel_size=2, stride=2, padding=1)
 
         self.relu = nn.ReLU()
 
-        self.fc1 = nn.Linear(512, 120)
+        self.fc1 = nn.Linear(5408, 2048)
+        self.fc2 = nn.Linear(2048, 1024)
 
-        self.value = nn.Linear(120, 1)
-        self.policy = nn.Linear(120, num_outputs)
+        self.value = nn.Linear(1024, 1)
+        self.policy = nn.Linear(1024, num_outputs)
 
     def forward(self, inputs):
         x = self.relu(self.conv1(inputs))
         x = self.relu(self.conv2(x))
-        x = self.relu(self.conv3(x))
-        x = self.relu(self.conv4(x))
 
-        x = x.view(-1, 512)
+        x = x.view(-1, 5408)
 
         x = self.relu(self.fc1(x))
+        x = self.relu(self.fc2(x))
 
         return self.policy(x), self.value(x)
 
@@ -106,3 +104,5 @@ class Knowledge():
         loss_fn = (policy_loss + self.value_loss_coef * value_loss)
         loss_fn.backward()
         self.optimizer.step()
+
+        return float(values.mean().data)
