@@ -42,6 +42,7 @@ class Knowledge():
 
         self.model = ActorCritic(num_outputs=self.action_space)
         self.model.double()
+        self.model.train()
 
         self.gamma = 0.9
         self.tau = 1.0
@@ -53,6 +54,21 @@ class Knowledge():
             self.model.parameters(), lr=self.learning_rate
         )
         self.model = self.model.to('cpu')
+
+    def load_shared_model(self, shared_model):
+        self.shared_model = shared_model
+        self.model.load_state_dict(self.shared_model.state_dict())
+
+    def reload_model(self):
+        if self.shared_model:
+            self.model.load_state_dict(self.shared_model.state_dict())
+
+    def ensure_shared_grads(self):
+        for param, shared_param in zip(self.model.parameters(),
+                                       self.shared_model.parameters()):
+            if shared_param.grad is not None:
+                return
+            shared_param._grad = param.grad
 
     def get_action(self, state):
         policy, _ = self.model(
@@ -103,6 +119,12 @@ class Knowledge():
         self.optimizer.zero_grad()
         loss_fn = (policy_loss + self.value_loss_coef * value_loss)
         loss_fn.backward()
+        if self.shared_model:
+            self.ensure_shared_grads()
         self.optimizer.step()
+
+        if self.shared_model:
+            torch.save(self.shared_model.state_dict(),
+                       'move_to_beacon_a3c.pth')
 
         return float(values.mean().data)

@@ -38,7 +38,7 @@ class Agent():
         self.rewards.append(reward)
 
     def start_step(self, current_step):
-        pass
+        self.knowledge.reload_model()
 
     def end_step(self, current_step):
         self.episode_steps = self.episode_steps + 1
