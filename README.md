@@ -63,3 +63,11 @@ The OpenAI Gym is one of the standars to apply RL algorithms in videogames. This
 The OpenAI Gym Retro is the same than Gym Atari but using 8bit/16bit consoles emulators to apply RL algorithms in that videogames.
 
 [Gym Retro](./src/environments/gym_retro/README.md)
+
+## Docker
+
+### Run examples
+
+```
+docker run -e ENV_MODULE=environments._test_env.test_engine -e AGENT_MODULE=environments._test_env._test_agent.agent madrl/madrl-cpu:latest
+```
