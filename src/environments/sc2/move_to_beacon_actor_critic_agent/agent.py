@@ -1,7 +1,9 @@
 '''
-    This agent is a base agent that works under the architecture defined in the documentation.
-    We are using this base agent to implement a lot of different RL algorithms. 
-    We will maintain updated this base agent with the goal of keeping the balance between flexibility and comfortability.
+    This agent is a base agent that works under the architecture
+    defined in the documentation. We are using this base agent to
+    implement a lot of different RL algorithms.  We will maintain
+    updated this base agent with the goal of keeping the balance
+    between flexibility and comfortability.
 '''
 
 from .knowledge import Knowledge
@@ -19,6 +21,7 @@ class Agent():
 
         self.total_steps = 0
         self.max_reward = 0
+        self.values_mean = 0
         self.rewards = []
 
     def get_action(self, observation):
@@ -26,7 +29,8 @@ class Agent():
         agent_action = self.knowledge.get_action(state)
         return self.actuator.agent_to_env(agent_action)
 
-    def add_experience(self, observation, reward, env_action, next_observation):
+    def add_experience(self, observation, reward, env_action,
+                       next_observation):
         agent_action = self.actuator.env_to_agent(env_action)
         state = self.interpreter.obs_to_state(observation)
         next_state = self.interpreter.obs_to_state(next_observation)
@@ -50,11 +54,12 @@ class Agent():
             self.max_reward = episode_reward
         print("Episode:", current_episode,
               ", episode_reward:", episode_reward,
+              ", mean value: ", self.values_mean,
               ", max_reward:", self.max_reward,
               ", episode_steps:", self.episode_steps,
               ", total_steps:", self.total_steps)
         self.rewards = []
 
     def train(self):
-        self.knowledge.train(self.experiences.get())
+        self.values_mean = self.knowledge.train(self.experiences.get())
         self.experiences.reset()
