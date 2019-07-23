@@ -12,6 +12,3 @@ COPY . .
 ENV PYTHONPATH  ./src/
 
 CMD [ "python3.7", "./src/environments/main.py" ]
-
-
-# docker run -e ENV_MODULE=environments.gym_atari.train_agent -e AGENT_MODULE=environments.gym_atari.breakout_actor_critic_policy.agent e- GAME=BreakoutDeterministic-v4 madrl-cpu:local
