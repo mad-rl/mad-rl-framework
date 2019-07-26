@@ -15,6 +15,7 @@ class Engine:
         action_space = 49
         self.shared_model = ActorCritic(
             input_frames, num_outputs=action_space)
+        self.shared_model.double()
         self.shared_model.share_memory()
 
     def train_worker(self, config, game, render):
