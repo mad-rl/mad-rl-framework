@@ -116,6 +116,7 @@ class Knowledge():
         self.optimizer.zero_grad()
         loss_fn = (policy_loss + self.value_loss_coef * value_loss)
         loss_fn.backward()
+        self.ensure_shared_grads()
         self.optimizer.step()
 
         torch.save(self.shared_model.state_dict(), 'sf2_a3c.pth')
