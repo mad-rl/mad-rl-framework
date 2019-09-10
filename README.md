@@ -38,10 +38,10 @@ The components within the framework are:
 
 ### Engine requirements
 
-Each engine has its own requirements. We recommend to use a virtual environment such a pipenv, virtualenv or conda in order to isolate the specific requirements of each engine from your current libraries or other engines.
+Each engine has its own requirements. We recommend to use a virtual environment such a pipenv, virtualenv or conda environment in order to isolate the specific requirements of each engine from your current libraries or other engines.
 
 ```
-pip install -f ./src/environments/{environment_name}/requirements.txt
+pip install -r ./src/environments/{environment_name}/requirements.txt
 ```
 
 ### Test the environment
