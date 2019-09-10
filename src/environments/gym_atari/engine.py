@@ -40,7 +40,7 @@ class Engine:
                         env.render()
 
                     agent.add_experience(
-                        observation, reward, action, next_observation, info)
+                        observation, reward, action, next_observation)
                     agent.end_step(step)
 
                     step = step + 1
