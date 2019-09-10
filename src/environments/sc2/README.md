@@ -1,4 +1,4 @@
-Gym Retro
+SC2
 ===
 
 ## Install dependencies
@@ -11,8 +11,8 @@ pip install -r ./src/environments/gym_retro/requirements.txt
 
 ### Agents
 
-#### SFII Actor-Critic
+#### SC2 Base Agent
 
 ```
-PYTHONPATH=./src/ ENGINE_MODULE=environments.gym_retro.engine AGENT_MODULE=environments.gym_retro.sf2_actor_critic_policy.agent GAME=StreetFighterIISpecialChampionEdition-Genesis python ./src/environments/main.py
+PYTHONPATH=./src/ ENGINE_MODULE=environments.sc2.engine AGENT_MODULE=environments.sc2.base_agent.agent python ./src/environments/main.py
 ```
